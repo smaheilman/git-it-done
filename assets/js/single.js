@@ -1,6 +1,21 @@
 var repoNameEl = document.querySelector("repo-name");
 var issueContainerEl = document.querySelector("#issues-container");
 var limitWarningEl = document.querySelector("#limit-warning");
+var repoNameEl = document.querySelector("repo-name");
+
+var getRepoName= function() {
+    var queryString = document.location.search;
+    var repoName = queryString.split("=")[1];
+
+    if(repoName) {
+     repoNameEl.textContent = repoName;
+     getRepoName(repoName);
+    }
+    else {
+        document.location.replace("./index.html");
+    }
+    console.log(repoName);
+}
 
 var getRepoIssues = function (repo) {
     console.log(repo);
@@ -68,4 +83,5 @@ var displayWarning = function (repo) {
     limitWarningEl.appendChild(linkEl);
 };
 
-getRepoIssues("facebook/react");
+getRepoIssues("microsoft/activities");
+getRepoName();
