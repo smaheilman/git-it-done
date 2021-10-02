@@ -1,7 +1,6 @@
-var repoNameEl = document.querySelector("repo-name");
+var repoNameEl = document.querySelector("#repo-name");
 var issueContainerEl = document.querySelector("#issues-container");
 var limitWarningEl = document.querySelector("#limit-warning");
-var repoNameEl = document.querySelector("repo-name");
 
 var getRepoName= function() {
     var queryString = document.location.search;
@@ -9,17 +8,14 @@ var getRepoName= function() {
 
     if(repoName) {
      repoNameEl.textContent = repoName;
-     getRepoName(repoName);
+     getRepoIssues(repoName);
     }
     else {
         document.location.replace("./index.html");
     }
-    console.log(repoName);
-}
+};
 
 var getRepoIssues = function (repo) {
-    console.log(repo);
-
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
     fetch(apiUrl).then(function (response) {
         //request was successful
@@ -83,5 +79,4 @@ var displayWarning = function (repo) {
     limitWarningEl.appendChild(linkEl);
 };
 
-getRepoIssues("microsoft/activities");
 getRepoName();
